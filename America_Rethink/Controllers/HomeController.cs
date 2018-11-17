@@ -12,7 +12,14 @@ namespace America_Rethink.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            HomeModel model = new HomeModel
+            {
+                Logo = true,
+                Text = "stuff"
+            };
+
+
+            return View(model);
         }
 
         public IActionResult About()
