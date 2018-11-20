@@ -13,5 +13,10 @@
 
   <ItemGroup>
     <Folder Include="Repositories\" />
+    <Folder Include="Objects\" />
+    <Folder Include="SQL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="web.cs" />
   </ItemGroup>
 </Project>

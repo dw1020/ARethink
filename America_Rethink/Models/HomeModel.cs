@@ -12,6 +12,7 @@ namespace America_Rethink.Models
     {
         public bool Logo { get; set; } = true;
         public string Text { get; set; } = "";
+        public string Stuff { get; set; }
 
 
     }
