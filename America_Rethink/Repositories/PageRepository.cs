@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Collections;
+using America_Rethink.Objects;
+using America_Rethink.Objects;
+using System.IO;
 
 namespace America_Rethink.Repositories
 {
@@ -31,21 +34,58 @@ namespace America_Rethink.Repositories
             conn.Close();
 
             return rdr.ToString();
-            
-
-
 
         }
 
         public Page GetPage(string PageName){
-            //Connect and open the connection
-            MySqlConnection conn = connectToDatabase();
-            conn.Open();
+            try
+            {
+                //Connect and open the connection
+                MySqlConnection conn = connectToDatabase();
+                conn.Open();
 
-            //create the command
-            var command = conn.CreateCommand();
+                //create the command
+                var command = conn.CreateCommand();
 
-            command.CommandText = "";
+                //Read sql from file
+                FileInfo file = new FileInfo("SQL/GetPage.sql");
+                string script = file.OpenText().ReadToEnd();
+
+
+                command.CommandText = script;
+
+                command.Parameters.AddWithValue("?PageID", PageName);
+                command.Prepare();
+
+                MySqlDataReader rdr = command.ExecuteReader();
+
+                rdr.Read();
+
+                //Make the Page Object
+                Page resultingPage = new Page();
+
+                resultingPage.URL = rdr["URL"].ToString();
+                resultingPage.PageID = rdr["PageID"].ToString();
+                resultingPage.PageType = rdr["PageType"].ToString();
+                resultingPage.PageName = rdr["PageName"].ToString();
+                resultingPage.ActiveFrom = DateTime.Parse(rdr["ActiveFrom"].ToString());
+                resultingPage.ActiveTo = DateTime.Parse(rdr["ActiveTo"].ToString());
+                resultingPage.CreatedBy = rdr["CreatedBy"].ToString();
+                resultingPage.CreatedDate = DateTime.Parse(rdr["CreatedDate"].ToString());
+                resultingPage.LastUpdatedBy = rdr["LastUpdatedBy"].ToString();
+                resultingPage.LastUpdatedDate = DateTime.Parse(rdr["LastUpdatedDate"].ToString());
+
+                //close connection
+                conn.Close();
+
+                //return the new page
+                return resultingPage;
+            }
+            catch(MySqlException ex){
+                Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                return null;
+            }
+
         }
     }
 }
