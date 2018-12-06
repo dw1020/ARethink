@@ -6,9 +6,9 @@
     
 }
 
-@BodyContent{}
 
-<div id="Home" class="jumbotron">
+
+<div id="Home" class="">
     <div class="logo @(Model.Logo ? "":"hidden")">
         <img alt="America Rethink" src="/images/logo.png" />
     </div>
@@ -16,7 +16,7 @@
         <h4>
             @Model.Text
 
-            @Model.Stuff[0]
+            @Model.Stuff
         </h4>
     </div>
     
