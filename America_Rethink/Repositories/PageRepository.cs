@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +9,10 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Collections;
 using America_Rethink.Objects;
+<<<<<<< HEAD
 using America_Rethink.Objects;
+=======
+>>>>>>> 01c8b35... Pushing changes
 using System.IO;
 
 namespace America_Rethink.Repositories

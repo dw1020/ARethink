@@ -18,7 +18,7 @@ namespace America_Rethink.Controllers
             HomeModel model = new HomeModel
             {
                 Logo = true,
-                Text = "stuff",
+                Text = repo.GetPage("HomePage").ToString(),
                 Stuff = repo.PageRepo()
             };
 

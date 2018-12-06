@@ -13,28 +13,39 @@ namespace America_Rethink.Objects
         public string CreatedBy { get; set; } = "";
         public DateTime CreatedDate { get; set; }
         public DateTime ActiveFrom { get; set; } 
-        public DateTime ActiveTo { get; set; } 
-        public bool isActive { get; }
+        public DateTime ActiveTo { get; set; }
 
 
 
         public Page()
         {
 
+           
+
+        }
+
+        public override string ToString(){
+            string str = PageID + "    " + PageName + "    " + URL + "    " + LastUpdatedBy + "    " +
+                LastUpdatedDate.ToString() + "    " + CreatedBy + "    " + CreatedDate.ToString() + "    " + ActiveFrom.ToString() +
+                               "    " + ActiveFrom.ToString() + "    " + ActiveTo.ToString() + "    " + isActive();
+            return str;
+        }
+
+        public bool isActive(){
             var now = DateTime.Now;
             var defaultDate = new DateTime(1900, 01, 01, 00, 00, 00);
 
             //Determine if the page is active
-            if ((ActiveFrom >= now && ActiveTo <= now) || 
-               (ActiveFrom == defaultDate && ActiveTo <= now ) ||
-               (ActiveFrom == defaultDate && ActiveTo == defaultDate)){
-                isActive = true;
+            if ((ActiveFrom >= now && ActiveTo <= now) ||
+               (ActiveFrom == defaultDate && ActiveTo <= now) ||
+               (ActiveFrom == defaultDate && ActiveTo == defaultDate))
+            {
+                return true;
             }
             else
             {
-                isActive = false;
+                return false;
             }
-
         }
 
 
