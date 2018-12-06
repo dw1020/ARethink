@@ -15,14 +15,13 @@ namespace America_Rethink.Controllers
         {
             PageRepository repo = new PageRepository();
 
-            HomeModel model = new HomeModel
+            HomeModel model;
+            model = new HomeModel
             {
                 Logo = true,
                 Text = repo.GetPage("HomePage").ToString(),
                 Stuff = repo.PageRepo()
             };
-
-
             return View(model);
         }
 

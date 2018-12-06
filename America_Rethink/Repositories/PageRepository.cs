@@ -16,14 +16,14 @@ namespace America_Rethink.Repositories
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class PageRepository
     {
-        private MySqlConnection connectToDatabase(){
+        private MySqlConnection ConnectToDatabase(){
             String connectionStr = ConfigurationManager.ConnectionStrings["remoteConnection"].ToString();
             MySqlConnection connection = new MySqlConnection(connectionStr);
             return connection;
         }
 
         public string PageRepo(){
-            MySqlConnection conn = connectToDatabase();
+            MySqlConnection conn = ConnectToDatabase();
             conn.Open();
             var command = conn.CreateCommand();
             command.CommandText = "SELECT * FROM Page";
@@ -40,7 +40,7 @@ namespace America_Rethink.Repositories
             try
             {
                 //Connect and open the connection
-                MySqlConnection conn = connectToDatabase();
+                MySqlConnection conn = ConnectToDatabase();
                 conn.Open();
 
                 //create the command
