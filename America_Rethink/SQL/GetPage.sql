@@ -1,0 +1,1 @@
+﻿SELECT * FROM `Page` WHERE PageID = ?PageID

@@ -5,14 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using America_Rethink.Models;
+using America_Rethink.Repositories;
 
 namespace America_Rethink.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-            return View();
+            PageRepository repo = new PageRepository();
+
+            HomeModel model = new HomeModel();
+            if (model != null)
+            {
+
+                model.Logo = true;
+                model.Text = repo.GetPage("HomePage")?.ToString();
+                //model.Stuff = repo.PageRepo();
+            }
+
+            return View(model);
         }
 
         public IActionResult About()
